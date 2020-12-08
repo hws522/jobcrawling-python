@@ -1,7 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 
-SARAMIN_URL = "http://www.saramin.co.kr/zf_user/search/recruit?search_area=main&search_done=y&search_optional_item=n&searchType=default_popular&searchword=python&recruitPage=1&recruitSort=relation&recruitPageCount=50&inner_com_type=&company_cd=0%2C1%2C2%2C3%2C4%2C5%2C6%2C7%2C9%2C10&quick_apply=&except_read="
+LIMIT = 50
+SARAMIN_URL = f"http://www.saramin.co.kr/zf_user/search/recruit?search_area=main&search_done=y&search_optional_item=n&searchType=default_popular&searchword=python&recruitPage=1&recruitSort=relation&recruitPageCount={LIMIT}&inner_com_type=&company_cd=0%2C1%2C2%2C3%2C4%2C5%2C6%2C7%2C9%2C10&quick_apply=&except_read="
 
 def extract_saramin_pages():
     result = requests.get(SARAMIN_URL)
@@ -23,3 +24,9 @@ def extract_saramin_pages():
     max_page = pages[-1]
 # 마지막페이지 
     return max_page
+
+
+def extract_saramin_jobs(last_page):
+    for page in range(last_page):
+        result = requests.get(f"{SARAMIN_URL}&recruitPageCount={page*LIMIT}")
+        print(result)
