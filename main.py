@@ -1,7 +1,5 @@
-from saramin import extract_saramin_jobs, extract_saramin_pages
+from saramin import get_jobs
+from jobkorea import get_jobkorea_jobs
 
-last_saramin_page = extract_saramin_pages()
-
-sramin_jobs = extract_saramin_jobs(last_saramin_page)
-
-print(sramin_jobs) 
+#print(get_jobs()) 
+print(get_jobkorea_jobs())
