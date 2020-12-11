@@ -20,8 +20,21 @@ def get_last_page():
 
 def extract_job(html):
     title = html.find("div", {"class": "post-list-info"}).find("a")["title"]
+    company = html.find("div", {"class": "post-list-corp"}).find("a")["title"]
+    location = (
+        html.find("div", {"class": "post-list-info"})
+        .find("p", {"class": "option"})
+        .find("span", {"class": "long"})
+        .string
+    )
+    job_id = html["data-gno"]
 
-    print(title)
+    return {
+        "title": title,
+        "company": company,
+        "location": location,
+        "link": f"http://www.jobkorea.co.kr/Recruit/GI_Read/{job_id}?Oem_Code=C1&logpath=1",
+    }
 
 
 def extract_jobs(last_page):
@@ -40,4 +53,4 @@ def extract_jobs(last_page):
 def get_jobs():
     last_page = get_last_page()
     jobs = extract_jobs(last_page)
-    return last_page
+    return jobs
