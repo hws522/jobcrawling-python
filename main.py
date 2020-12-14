@@ -7,4 +7,4 @@ saramin_jobs = get_saramin_jobs()
 jobkorea_jobs = get_jobkorea_jobs()
 jobs = saramin_jobs + jobkorea_jobs
 
-save_to_file(jobs)
+# save_to_file(jobs)

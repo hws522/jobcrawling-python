@@ -3,10 +3,9 @@ from bs4 import BeautifulSoup
 
 LIMIT = 50
 search_word_python = "python"
-SARAMIN_URL_PY = f"http://www.saramin.co.kr/zf_user/search/recruit?search_area=main&search_done=y&search_optional_item=n&searchType=default_popular&searchword={search_word_python}&recruitPage=1&recruitSort=relation&recruitPageCount={LIMIT}&inner_com_type=&company_cd=0%2C1%2C2%2C3%2C4%2C5%2C6%2C7%2C9%2C10&quick_apply=&except_read="
 
 
-def extract_saramin_pages():
+def extract_saramin_pages(SARAMIN_URL_PY):
     result = requests.get(SARAMIN_URL_PY)
 
     soup = BeautifulSoup(result.text, "html.parser")
@@ -42,7 +41,7 @@ def extract_job(html):
     }
 
 
-def extract_saramin_jobs(last_page):
+def extract_saramin_jobs(last_page, SARAMIN_URL_PY):
     jobs = []
     for page in range(last_page):
         # print(f"Scrapping page {page}")
@@ -55,7 +54,9 @@ def extract_saramin_jobs(last_page):
     return jobs
 
 
-def get_jobs():
-    last_saramin_page = extract_saramin_pages()
-    saramin_jobs = extract_saramin_jobs(last_saramin_page)
+def get_jobs(word):
+    SARAMIN_URL_PY = f"http://www.saramin.co.kr/zf_user/search/recruit?search_area=main&search_done=y&search_optional_item=n&searchType=default_popular&searchword={word}&recruitPage=1&recruitSort=relation&recruitPageCount={LIMIT}&inner_com_type=&company_cd=0%2C1%2C2%2C3%2C4%2C5%2C6%2C7%2C9%2C10&quick_apply=&except_read="
+
+    last_saramin_page = extract_saramin_pages(SARAMIN_URL_PY)
+    saramin_jobs = extract_saramin_jobs(last_saramin_page, SARAMIN_URL_PY)
     return saramin_jobs
