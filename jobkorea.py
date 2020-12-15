@@ -2,12 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 
 search_word_python = "python"
-JOBKOREA_URL_PY = (
-    f"http://www.jobkorea.co.kr/Search/?stext={search_word_python}&tabType=recruit"
-)
 
 
-def get_last_page():
+def get_last_page(JOBKOREA_URL_PY):
     result = requests.get(JOBKOREA_URL_PY)
 
     soup = BeautifulSoup(result.text, "html.parser")
@@ -37,7 +34,7 @@ def extract_job(html):
     }
 
 
-def extract_jobs(last_page):
+def extract_jobs(last_page, JOBKOREA_URL_PY):
     jobs = []
     for page in range(last_page):
         result = requests.get(f"{JOBKOREA_URL_PY}&Page_No={page+1}")
@@ -50,7 +47,9 @@ def extract_jobs(last_page):
     return jobs
 
 
-def get_jobs():
-    last_page = get_last_page()
-    jobs = extract_jobs(last_page)
+def get_jobkorea_jobs(word):
+    JOBKOREA_URL_PY = f"http://www.jobkorea.co.kr/Search/?stext={word}&tabType=recruit"
+
+    last_page = get_last_page(JOBKOREA_URL_PY)
+    jobs = extract_jobs(last_page, JOBKOREA_URL_PY)
     return jobs

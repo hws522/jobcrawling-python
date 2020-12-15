@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, send_file
-from saramin import get_jobs
+from jobkorea import get_jobkorea_jobs
+from saramin import get_saramin_jobs
 from save import save_to_file
 
 app = Flask("jobScrapper")
@@ -21,7 +22,7 @@ def report():
         if fromDb:
             jobs = fromDb
         else:
-            jobs = get_jobs(word)
+            jobs = get_jobkorea_jobs(word) + get_saramin_jobs(word)
             db[word] = jobs
 
     else:
@@ -47,4 +48,4 @@ def export():
         return redirect("/")
 
 
-app.run(host="127.0.0.1")
+# app.run(host="127.0.0.1")
