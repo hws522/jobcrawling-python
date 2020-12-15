@@ -6,7 +6,7 @@ python을 이용하여 매번 검색하기 번거로운 취업사이트의 검�
 
 ### screen
 
-<img src="https://user-images.githubusercontent.com/59306143/102274677-9c378e00-3f67-11eb-9375-69c2a8d11f46.gif" alt="Untitled" width="800" height="600"/>
+<img src="https://user-images.githubusercontent.com/59306143/102274677-9c378e00-3f67-11eb-9375-69c2a8d11f46.gif" alt="Untitled" width="700" height="500"/>
 
 
 ### explanation
