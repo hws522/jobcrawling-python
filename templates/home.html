@@ -3,13 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
     <title>Job Search</title>
   </head>
-  <body>
-    <h1>Job Search</h1>
-    <form action="/report" method="GET">
-      <input placeholder="What job do you want?" required name="word" />
-      <button>Search</button>
+  <body class="home_body">
+    <h1></h1>
+    <form class="search-form" action="/report" method="GET">
+      <label id="hide" for="search-input">Job Search</label>
+      <input
+        id="search-input"
+        placeholder="What job do you want?"
+        required
+        name="word"
+      />
     </form>
   </body>
 </html>
